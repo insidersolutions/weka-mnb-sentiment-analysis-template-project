@@ -3,7 +3,7 @@ weka-mnb-sentiment-analysis-template-project
 
 The template project for three way sentiment classification.
 
-The blog post describing this code: [http://dmitrykan.blogspot.com](http://dmitrykan.blogspot.com)
+The blog post describing this code: [http://dmitrykan.blogspot.com](http://dmitrykan.blogspot.fi/2014/04/weka-template-project-for-sentiment.html)
 
 In order to utilize the kaggle's training set the code is using you need to accept the terms and conditions of the
 competition and put the training set train.csv into the kaggle directory.
