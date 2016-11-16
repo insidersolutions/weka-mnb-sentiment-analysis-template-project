@@ -1,6 +1,7 @@
-package info.semanticanalyzer.classifiers.weka;
+package info.semanticanalyzer.classifiers.weka.threeway;
 
 import com.google.inject.internal.util.Join;
+import info.semanticanalyzer.classifiers.weka.SentimentClass;
 import weka.classifiers.bayes.NaiveBayesMultinomialText;
 import weka.classifiers.evaluation.Evaluation;
 import weka.core.Attribute;

@@ -1,4 +1,6 @@
-package info.semanticanalyzer.classifiers.weka;
+package info.semanticanalyzer.classifiers.weka.fiveway;
+
+import info.semanticanalyzer.classifiers.weka.SentimentClass;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -12,17 +14,15 @@ import java.io.IOException;
  * PhraseId	SentenceId	Phrase	Sentiment
  *
  */
-public class KaggleCSVReader {
+class KaggleCSVReaderFiveWay {
 
-    String line;
-    CSVInstanceThreeWay csvInstanceThreeWay;
-    int step = 0;
+    private String line;
+    private CSVInstanceFiveWay csvInstanceFiveWay;
+    private int step = 0;
 
-    BufferedReader br;
+    private BufferedReader br;
 
-    int showStatsAt = 1000;
-
-    public void readKaggleCSV(String csvFile) throws IOException {
+    void readKaggleCSV(String csvFile) throws IOException {
         br = new BufferedReader(new FileReader(csvFile));
 
         line = br.readLine();
@@ -41,32 +41,33 @@ public class KaggleCSVReader {
     private void extractInstance() {
         String[] attrs = line.split("\t");
 
-        if (csvInstanceThreeWay == null) {
-            csvInstanceThreeWay = new CSVInstanceThreeWay();
+        if (csvInstanceFiveWay == null) {
+            csvInstanceFiveWay = new CSVInstanceFiveWay();
         }
-        csvInstanceThreeWay.phraseID = Integer.valueOf(attrs[0]);
-        csvInstanceThreeWay.sentenceID = Integer.valueOf(attrs[1]);
-        csvInstanceThreeWay.phrase = attrs[2];
+        csvInstanceFiveWay.phraseID = Integer.valueOf(attrs[0]);
+        csvInstanceFiveWay.sentenceID = Integer.valueOf(attrs[1]);
+        csvInstanceFiveWay.phrase = attrs[2];
         // there is additionally sentiment tag for training data
         if (attrs.length > 3) {
             Integer sentimentOrdinal = Integer.valueOf(attrs[3]);
 
-            if (sentimentOrdinal <= 1) {
-                csvInstanceThreeWay.sentiment = SentimentClass.ThreeWayClazz.values()[sentimentOrdinal];
-                csvInstanceThreeWay.isValidInstance = true;
+            if (sentimentOrdinal <= 4) {
+                csvInstanceFiveWay.sentiment = SentimentClass.FiveWayClazz.values()[sentimentOrdinal];
+                csvInstanceFiveWay.isValidInstance = true;
             } else {
                 // can't process the instance, because the sentiment ordinal is out of the acceptable range of two classes
-                csvInstanceThreeWay.isValidInstance = false;
+                csvInstanceFiveWay.isValidInstance = false;
             }
         }
     }
 
-    public CSVInstanceThreeWay next() {
+    CSVInstanceFiveWay next() {
         if (step == 0) {
             step++;
-            return csvInstanceThreeWay;
+            return csvInstanceFiveWay;
         }
 
+        int showStatsAt = 1000;
         if (step % showStatsAt == 0) {
             System.out.println("Processed instances: " + step);
         }
@@ -79,13 +80,13 @@ public class KaggleCSVReader {
                 return null;
             }
             step++;
-            return csvInstanceThreeWay;
+            return csvInstanceFiveWay;
         } catch (IOException e) {
             return null;
         }
     }
 
-    public void close() {
+    void close() {
         try {
             br.close();
         } catch (IOException e) {
@@ -93,16 +94,16 @@ public class KaggleCSVReader {
         }
     }
 
-    public class CSVInstanceThreeWay {
-        public int phraseID;
-        public int sentenceID;
-        public String phrase;
-        public SentimentClass.ThreeWayClazz sentiment;
-        public boolean isValidInstance;
+    class CSVInstanceFiveWay {
+        int phraseID;
+        int sentenceID;
+        String phrase;
+        SentimentClass.FiveWayClazz sentiment;
+        boolean isValidInstance;
 
         @Override
         public String toString() {
-            return "CSVInstanceThreeWay{" +
+            return "CSVInstanceFiveWay{" +
                     "phraseID=" + phraseID +
                     ", sentenceID=" + sentenceID +
                     ", phrase='" + phrase + '\'' +

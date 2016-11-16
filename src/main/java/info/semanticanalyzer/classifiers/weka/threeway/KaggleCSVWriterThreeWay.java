@@ -1,4 +1,6 @@
-package info.semanticanalyzer.classifiers.weka;
+package info.semanticanalyzer.classifiers.weka.threeway;
+
+import info.semanticanalyzer.classifiers.weka.SentimentClass;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -8,17 +10,17 @@ import java.io.OutputStreamWriter;
 /**
  * Created by dmitrykan on 27.04.2014.
  */
-public class KaggleCSVWriter {
+public class KaggleCSVWriterThreeWay {
     public static final String CSV_HEADER = "PhraseId,Sentiment";
     BufferedWriter bw;
 
-    public KaggleCSVWriter(String csvFile) throws IOException {
+    public KaggleCSVWriterThreeWay(String csvFile) throws IOException {
         bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(csvFile), "utf8"));
         bw.write(CSV_HEADER);
         bw.write("\n");
     }
 
-    public void writeKaggleCSV(KaggleCSVReader.CSVInstanceThreeWay csvInstanceThreeWay, SentimentClass.FiveWayClazz sentiment) throws IOException {
+    public void writeKaggleCSV(KaggleCSVReaderThreeWay.CSVInstanceThreeWay csvInstanceThreeWay, SentimentClass.FiveWayClazz sentiment) throws IOException {
         try {
             bw.write(String.valueOf(csvInstanceThreeWay.phraseID));
             bw.write(",");

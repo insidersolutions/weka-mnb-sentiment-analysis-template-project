@@ -1,5 +1,6 @@
 package info.semanticanalyzer.classifiers.weka;
 
+import info.semanticanalyzer.classifiers.weka.threeway.ThreeWayMNBTrainer;
 import junit.framework.Assert;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
