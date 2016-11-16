@@ -3,6 +3,8 @@ weka-mnb-sentiment-analysis-template-project
 
 The template project for three way sentiment classification.
 
+If you are looking to integrate natural language processing APIs or modules into your projects, check this repo out: https://github.com/semanticanalyzer/nlproc_sdk_sample_code
+
 The blog post describing this code in English: [http://dmitrykan.blogspot.com](http://dmitrykan.blogspot.fi/2014/04/weka-template-project-for-sentiment.html)
 In Russian (блог-пост на русском): [http://habrahabr.ru/](http://habrahabr.ru/post/229779/)
 
